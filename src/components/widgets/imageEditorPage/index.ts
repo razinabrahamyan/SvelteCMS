@@ -1,10 +1,10 @@
 import type { Display } from '../types';
 export default ({
-	title,
+	db_fieldName,
 	display,
 	fields
 }: {
-	title: string;
+	db_fieldName: string;
 	display?: Display;
 	fields: Array<any>;
 }) => {
@@ -14,8 +14,8 @@ export default ({
 			`<img class='max-w-[200px] inline-block' src="${uploader.path}/${
 				entry['Name'] + '.webp'
 			}" />`;
-	const field: any = { schema: {}, title, upload: true, fields, display };
-	field.schema[title] = {
+	const field: any = { schema: {}, db_fieldName, upload: true, fields, display };
+	field.schema[db_fieldName] = {
 		originalname: 'string',
 		encoding: 'string',
 		mimetype: 'string',

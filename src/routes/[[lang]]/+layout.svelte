@@ -1,9 +1,8 @@
 <script lang="ts">
 	// Sveltekit
 	import { fly } from 'svelte/transition';
-	import { is_dark, entryData } from '$src/stores/store';
+	import { is_dark, entryData, saveEditedImage } from '$src/stores/store';
 	import { enhance } from '$app/forms';
-
 	import { PUBLIC_SITENAME } from '$env/static/public';
 	import SimpleCmsLogo from '$src/components/icons/SimpleCMS_Logo.svelte';
 	import AnimatedHamburger from '$src/components/AnimatedHamburger.svelte';
@@ -73,38 +72,45 @@
 	import axios from 'axios';
 	import entryListTableStore from '$src/lib/stores/entryListTable';
 
+	// console.log(collections[0], ' ssssssssssssssss ');
+
 	async function signOut() {
 		await invalidateAll();
 	}
+
 	let paging = { page: 1, entryLength: 10, totalCount: 0, lengthList: [10, 25, 50, 100, 500] };
 	let totalPages = 0;
 	let deleteMap: any = {};
-	let refresh = async (collection: any) => {
-		let entryList = [];
+	let refresh: (collection: any) => Promise<any>;
 
-		({ entryList, totalCount: paging.totalCount } = await axios
-			.get(`/api/${collection.name}?page=${paging.page}&length=${paging.entryLength}`)
-			.then((data) => data.data));
-		totalPages = Math.ceil(paging.totalCount / paging.entryLength);
-		deleteMap = {};
+	// let refresh = async (collection: any) => {
+	// 	let entryList = [];
 
-		return { entryList, totalPages, deleteMap };
-	};
+	// 	({ entryList, totalCount: paging.totalCount } = await axios
+	// 		.get(`/api/${collection.name}?page=${paging.page}&length=${paging.entryLength}`)
+	// 		.then((data) => data.data));
+	// 	totalPages = Math.ceil(paging.totalCount / paging.entryLength);
+	// 	deleteMap = {};
+
+	// 	return { entryList, totalPages, deleteMap };
+	// };
 
 	async function submit() {
-		await saveFormData(collection);
-		const { deleteMap, entryList, totalPages } = await refresh(collection);
-		entryListTableStore.set({
-			deleteMap,
-			entryList,
-			totalPages
-		});
+		console.log(collection, 'colection');
+		if (collection.name === 'Image Editor') {
+			console.log('tuyn');
+			saveEditedImage.set(true);
+		} else {
+			console.log('fuckkkkkkkk');
+			await saveFormData(collection);
+		}
+
 		$showFieldsStore.showForm = false;
 		$entryData = undefined;
 		const t: ToastSettings = {
 			message: $LL.SBL_Save_message(),
 			// Optional: Presets for primary | secondary | tertiary | warning
-			//preset: 'success',
+			preset: 'success',
 			// Optional: The auto-hide settings
 			autohide: true,
 			timeout: 3000

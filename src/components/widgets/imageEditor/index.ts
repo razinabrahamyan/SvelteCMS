@@ -1,6 +1,6 @@
 import type { Display } from '../types';
 export default ({
-	title,
+	db_fieldName,
 	path = '',
 	display
 }: {
@@ -13,7 +13,7 @@ export default ({
 			`<img class='max-w-[200px] inline-block' src="${path}/${data?.originalname}" />`;
 	const field: any = {
 		schema: {},
-		title,
+		db_fieldName,
 		upload: true,
 		path,
 		display,
@@ -25,7 +25,7 @@ export default ({
 		width: 0,
 		height: 0
 	};
-	field.schema[title] = {
+	field.schema[db_fieldName] = {
 		originalname: 'string',
 		encoding: 'string',
 		mimetype: 'string',

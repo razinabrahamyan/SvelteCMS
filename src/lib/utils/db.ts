@@ -22,7 +22,7 @@ export const dbConnect: Handle = async ({ resolve, event }) => {
 			dbName: DB_NAME
 		})
 		.then((res) => {
-			// console.log('Connected to DB');
+			console.log('Connected to DB');
 			// console.log({ dbRes: res });
 		})
 		.catch((err) => {
@@ -45,6 +45,7 @@ for (const schema of schemas) {
 			timestamps: { currentTime: () => Date.now() }
 		}
 	);
+
 	collections[schema.name] = mongoose.models[schema.name]
 		? mongoose.model(schema.name)
 		: mongoose.model(schema.name, schema_object);

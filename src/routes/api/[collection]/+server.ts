@@ -37,9 +37,9 @@ export const PATCH: RequestHandler = async ({ params, request }) => {
 };
 
 export const POST: RequestHandler = async ({ params, request }) => {
+	console.log(request.body, 'wwwwwwwwwwwwwwwww');
 	const collection = collections[params.collection];
 	const data = await request.formData();
-
 	const body: any = {};
 	for (const key of data.keys()) {
 		try {

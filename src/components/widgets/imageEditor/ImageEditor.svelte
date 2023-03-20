@@ -6,7 +6,7 @@
 	import { saveEditedImage } from '$src/stores/store';
 	import { saveData } from '$src/lib/utils/utils_svelte';
 
-	export let field = { title: '', path: '', image: '' };
+	export let field = { db_fieldName: '', path: '', image: '' };
 	export let value: any;
 	export let scale: any;
 	export let collection: any;
