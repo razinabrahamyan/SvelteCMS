@@ -11,9 +11,8 @@ export default ({
 	const uploader = fields.find((x) => (x.upload = true));
 	if (!display)
 		display = async (data: any, field: any, entry: any) =>
-			`<img class='max-w-[200px] inline-block' src="${uploader.path}/${
-				entry['Name'] + '.webp'
-			}" />`;
+			`<img class='max-w-[200px] inline-block' src="${uploader.path}/${entry['Name']}" />`;
+
 	const field: any = { schema: {}, db_fieldName, upload: true, fields, display };
 	field.schema[db_fieldName] = {
 		originalname: 'string',

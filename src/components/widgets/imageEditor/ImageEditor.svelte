@@ -73,6 +73,7 @@
 		formData.append('crop_top', ((crop_top.value * height) / 225).toFixed(0));
 		formData.append('crop_bottom', ((crop_bottom.value * height) / 225).toFixed(0));
 		formData.append('blur_areas', JSON.stringify(blurAreas));
+
 		saveData(collection, formData).then(() => {
 			saveEditedImage.set(false);
 		});
@@ -98,7 +99,7 @@
 
 <input
 	use:setFile
-	name={field.title}
+	name={field.db_fieldName}
 	class="block w-fulxl text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
 	type="file"
 />

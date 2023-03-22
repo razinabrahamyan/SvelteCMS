@@ -4,7 +4,7 @@ export default ({
 	path = '',
 	display
 }: {
-	title: string;
+	db_fieldName: string;
 	path: string;
 	display?: Display;
 }) => {

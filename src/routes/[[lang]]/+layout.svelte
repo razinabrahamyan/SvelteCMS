@@ -72,8 +72,6 @@
 	import axios from 'axios';
 	import entryListTableStore from '$src/lib/stores/entryListTable';
 
-	// console.log(collections[0], ' ssssssssssssssss ');
-
 	async function signOut() {
 		await invalidateAll();
 	}
@@ -96,15 +94,12 @@
 	// };
 
 	async function submit() {
-		console.log(collection, 'colection');
-		if (collection.name === 'Image Editor') {
-			console.log('tuyn');
+		if (collection.name === 'Images') {
 			saveEditedImage.set(true);
 		} else {
-			console.log('fuckkkkkkkk');
 			await saveFormData(collection);
 		}
-
+		// refresh(collection);
 		$showFieldsStore.showForm = false;
 		$entryData = undefined;
 		const t: ToastSettings = {

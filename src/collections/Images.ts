@@ -23,7 +23,7 @@ const schema: Schema = {
 			icon: 'ri:t-box-line',
 			relation: Posts,
 			display: async (data: any, field: any, entry: any) => {
-				console.log(data, 'dataaaaaaaa');
+				// console.log(data, 'dataaaaaaaa');
 
 				return data.first;
 			}
