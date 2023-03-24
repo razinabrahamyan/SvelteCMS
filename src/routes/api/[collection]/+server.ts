@@ -43,9 +43,9 @@ export const POST: RequestHandler = async ({ params, request }) => {
 	const collection = collections[params.collection];
 	const data = await request.formData();
 	const body: any = {};
-
 	body['files'] = [];
 	for (const key of data.keys()) {
+		console.log(key, 'key');
 		try {
 			body[key] = JSON.parse(data.get(key) as string);
 		} catch (e) {
@@ -107,11 +107,13 @@ export const POST: RequestHandler = async ({ params, request }) => {
 				});
 			}
 			const mainImage = new Image();
+
 			mainImage.onload = function () {
 				ctx.drawImage(mainImage, 0, 0, +body.width, +body.height);
 			};
 
 			mainImage.src = buffer;
+
 			for (const el of blur_areas) {
 				const image = new Image();
 				image.onload = function () {
